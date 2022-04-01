@@ -1,0 +1,113 @@
+﻿@page "/crud"
+@using global::CRUD.Pages.Components
+@inject HttpClient Http
+@inject IDialogService DialogService
+
+
+<MudButton @onclick="OpenDialog" Variant="Variant.Filled" Color="Color.Primary">
+    Open Simple Dialog
+</MudButton>
+
+
+<MudPaper Width="100%">
+	<MudContainer Fixed="true">
+		<MudTable Class="mt-5" Items="@riders" Dense="@dense" Hover="@hover" Bordered="@bordered" Striped="@striped" Filter="new Func<Riders, bool>(FilterCycleCheck)">
+    <ToolBarContent>
+        <MudText Typo="Typo.h6">Rider Descriptions</MudText>
+        <MudSpacer />
+        <MudTextField Immediate="true" @bind-Value="searchString1" Placeholder="Search" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+    </ToolBarContent>
+    <HeaderContent>
+        <MudTh>Rider Name</MudTh>
+        <MudTh>Phone Number</MudTh>
+        <MudTh>Address</MudTh>
+        <MudTh>Job Type</MudTh>
+        <MudTh>Gender</MudTh>
+        <MudTh>Weekly / Monthly</MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd DataLabel="Rider Name">@context.riderName</MudTd>
+        <MudTd DataLabel="Phone Number">@context.phoneNumber</MudTd>
+        <MudTd DataLabel="Address">@context.address</MudTd>
+        <MudTd DataLabel="Job Type">@context.jobType</MudTd>
+        <MudTd DataLabel="Gender">@context.gender</MudTd>
+        <MudTd DataLabel="Weekly / Monthly">Weekly: @context.weekly, Monthly: @context.monthly</MudTd>
+    </RowTemplate>
+    <PagerContent>
+        <MudTablePager />
+    </PagerContent>
+</MudTable>
+
+<div class="d-flex flex-wrap mt-4">
+    <MudSwitch @bind-Checked="@hover" Color="Color.Primary">Hover</MudSwitch>
+    <MudSwitch @bind-Checked="@dense" Color="Color.Secondary">Dense</MudSwitch>
+    <MudSwitch @bind-Checked="@striped" Color="Color.Tertiary">Striped</MudSwitch>
+    <MudSwitch @bind-Checked="@bordered" Color="Color.Warning">Bordered</MudSwitch>
+</div>
+	</MudContainer>
+</MudPaper>
+
+@code {
+    private Riders[]? riders;
+
+    public string searchString1 = "";
+    public bool dense = false;
+    public bool hover = true;
+    public bool bordered = true;
+    public bool striped = false; 
+
+
+    // Page On Load
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadRiders();
+    }
+
+    // Load Riders
+    private async Task LoadRiders()
+    {
+        riders = await Http.GetFromJsonAsync<Riders[]>("https://api.bespokeit.io/api/hr/allriderdescription");
+    }
+
+    // Filter Cycle Check
+    private bool FilterCycleCheck(Riders item)
+    {
+        if (item.riderName.ToLower().Contains(searchString1.ToLower()) || item.phoneNumber.Contains(searchString1))
+        {
+            return true;
+        }
+        return false;
+
+    }
+
+
+
+    public class Riders
+    {
+        public int id { get; set; }
+        public int riderId { get; set; }
+        public string riderName { get; set; }
+        public string phoneNumber { get; set; }
+        public string address { get; set; }
+        public string jobType { get; set; }
+        public string gender { get; set; }
+        public bool weekly { get; set; }
+        public bool monthly { get; set; }
+    } 
+
+    public class Rider
+    {
+        public int riderId { get; set; }
+        public string address { get; set; }
+        public string jobType { get; set; }
+        public string gender { get; set; }
+        public bool weekly { get; set; }
+        public bool monthly { get; set; }
+    }
+
+    private void OpenDialog()
+    {
+		var options = new DialogOptions { CloseOnEscapeKey = true };
+        DialogService.Show<AddModal>("Add Rider Description", options);
+    }
+}
