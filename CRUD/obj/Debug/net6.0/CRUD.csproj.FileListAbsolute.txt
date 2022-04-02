@@ -821,3 +821,7 @@ F:\Blazor\CRUD\CRUD\obj\Debug\net6.0\CRUD.csproj.CopyComplete
 F:\Blazor\CRUD\CRUD\obj\Debug\net6.0\CRUD.dll
 F:\Blazor\CRUD\CRUD\obj\Debug\net6.0\ref\CRUD.dll
 F:\Blazor\CRUD\CRUD\obj\Debug\net6.0\CRUD.pdb
+F:\Blazor\CRUD\CRUD\bin\Debug\net6.0\wwwroot\_framework\Blazored.LocalStorage.dll
+F:\Blazor\CRUD\CRUD\bin\Debug\net6.0\wwwroot\_framework\Blazored.LocalStorage.dll.gz
+F:\Blazor\CRUD\CRUD\bin\Debug\net6.0\Blazored.LocalStorage.dll
+F:\Blazor\CRUD\CRUD\obj\Debug\net6.0\build-gz\cvJhtsbl.gz

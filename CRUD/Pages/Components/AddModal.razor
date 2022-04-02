@@ -1,23 +1,40 @@
-﻿<MudDialog>
+﻿@using CRUD.Entity
+@inject HttpClient Http
+@inject Blazored.LocalStorage.ILocalStorageService LocalStore
+
+<MudDialog>
     <DialogContent>
         <MudForm @ref="form" @bind-IsValid="@success" @bind-Errors="@errors">
-            <MudTextField T="string" @bind-Value="@address" Label="Address" Required="true" RequiredError="Address is required!"/>
+            <MudSelect @bind-Value="@rider.riderId" T="int" Label="Rider" HelperText="String" Placeholder="Choose Rider..." AnchorOrigin="Origin.BottomCenter" Required="true" RequiredError="Rider is required!">
+                <MudSelectItem Value="@(0)" Disabled="true" >Choose Rider...</MudSelectItem>
+                <MudSelectItem Value="@(14)" >Nafis</MudSelectItem>
+                <MudSelectItem Value="@(15)" >Tarek</MudSelectItem>
+                <MudSelectItem Value="@(17)" >Robin</MudSelectItem>
+                <MudSelectItem Value="@(18)" >Jibon</MudSelectItem>
+                <MudSelectItem Value="@(19)" >Niloy</MudSelectItem>
+                <MudSelectItem Value="@(20)" >Olindo</MudSelectItem>
+                <MudSelectItem Value="@(21)" >Hasan</MudSelectItem>
+                <MudSelectItem Value="@(22)" >Rahi</MudSelectItem>
+                <MudSelectItem Value="@(24)" >Muhymeen</MudSelectItem>
+            </MudSelect>
+
+            <MudTextField T="string" @bind-Value="@rider.address" Label="Address" Required="true" RequiredError="Address is required!"/>
 
             <MudText Class="mt-5" Typo="Typo.subtitle1">Job Type</MudText>
-            <MudRadioGroup T="string" @bind-SelectedOption="@jobType" Required="true" RequiredError="Job type is required!">
+            <MudRadioGroup T="string" @bind-SelectedOption="@rider.jobType" Required="true" RequiredError="Job type is required!">
                             <MudRadio Option="@("Part-Time")">Part-Time</MudRadio>
                             <MudRadio Option="@("Full-Time")">Full-Time</MudRadio>
             </MudRadioGroup>
 
             <MudText Class="mt-5" Typo="Typo.subtitle1">Gender</MudText>
-            <MudRadioGroup T="string" @bind-SelectedOption="@gender" Required="true" RequiredError="Gender is required!">
+            <MudRadioGroup T="string" @bind-SelectedOption="@rider.gender" Required="true" RequiredError="Gender is required!">
                             <MudRadio Option="@("Male")">Male</MudRadio>
                             <MudRadio Option="@("Female")">Female</MudRadio>
             </MudRadioGroup>
 
-            <MudText Class="mt-5" Typo="Typo.subtitle1">payment Repetition</MudText>
-            <MudCheckBox @bind-Checked="@weekly" T="bool" Class="ml-n2" Label="Weekly"/>
-            <MudCheckBox @bind-Checked="@monthly" T="bool" Class="ml-n2" Label="Monthly"/>
+            <MudText Class="mt-5" Typo="Typo.subtitle1">Payment Ripitition</MudText>
+            <MudCheckBox @bind-Checked="@rider.weekly" T="bool" Class="ml-n2" Label="Weekly"/>
+            <MudCheckBox @bind-Checked="@rider.monthly" T="bool" Class="ml-n2" Label="Monthly"/>
 
             <div class="d-flex justify-content-end mb-5">
                 <MudButton Variant="Variant.Filled" Color="Color.Primary" Disabled="@(!success)" OnClick="@newRider" Class="ml-auto">Create Rider Description</MudButton>
@@ -32,27 +49,34 @@
     void Submit() => MudDialog.Close(DialogResult.Ok(true));
     void Cancel() => MudDialog.Cancel();
 
+    // Paremeters
+    [Parameter] public Riders[]? riders { get; set; }
+
+
+
     // Form Code
     bool success;
     string[] errors = { };
     MudForm form;
 
     // Input Values
-    string address = "";
-    string jobType = "";
-    string gender = "";
-    bool weekly;
-    bool monthly;
-
+    Rider rider = new Rider
+        {
+            address = "",
+            jobType = "",
+            gender = "",
+            riderId = 0,
+            weekly = false,
+            monthly = false
+        };
 
     // Add New Rider Description
-    private void newRider()
+    private async  Task newRider()
     {
-        Console.WriteLine(address);
-        Console.WriteLine(jobType);
-        Console.WriteLine(gender);
-        Console.WriteLine(weekly);
-        Console.WriteLine(monthly);
+        using var result = await Http.PostAsJsonAsync("https://api.bespokeit.io/api/hr/createRiderDescription", rider);
+        await LocalStore.RemoveItemAsync("RidersLocal");
+        riders = await Http.GetFromJsonAsync<Riders[]>("https://api.bespokeit.io/api/hr/allriderdescription");
+        await LocalStore.SetItemAsync("RidersLocal", riders);
     }
 
 }

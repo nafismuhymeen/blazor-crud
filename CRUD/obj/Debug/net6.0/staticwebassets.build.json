@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "obFIRLLY1hJF/PXNd0R/OsnNclQJUxJWU579omOHmdU=",
+  "Hash": "FZmcrazxq0ZHI+PWt19qjyRyl4CGFvHK1wUo3j2SkPA=",
   "Source": "CRUD",
   "BasePath": "/",
   "Mode": "Root",
@@ -83,6 +83,23 @@
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\Users\\Nafis\\.nuget\\packages\\microsoft.aspnetcore.components.webassembly\\6.0.0\\build\\net6.0\\blazor.webassembly.js"
+    },
+    {
+      "Identity": "F:\\Blazor\\CRUD\\CRUD\\bin\\Debug\\net6.0\\wwwroot\\_framework\\Blazored.LocalStorage.dll",
+      "SourceId": "CRUD",
+      "SourceType": "Computed",
+      "ContentRoot": "F:\\Blazor\\CRUD\\CRUD\\bin\\Debug\\net6.0\\wwwroot\\",
+      "BasePath": "/",
+      "RelativePath": "_framework/Blazored.LocalStorage.dll",
+      "AssetKind": "Build",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "BlazorWebAssemblyResource",
+      "AssetTraitValue": "runtime",
+      "CopyToOutputDirectory": "PreserveNewest",
+      "CopyToPublishDirectory": "Never",
+      "OriginalItemSpec": "C:\\Users\\Nafis\\.nuget\\packages\\blazored.localstorage\\4.2.0\\lib\\net6.0\\Blazored.LocalStorage.dll"
     },
     {
       "Identity": "F:\\Blazor\\CRUD\\CRUD\\bin\\Debug\\net6.0\\wwwroot\\_framework\\CRUD.dll",
@@ -170,6 +187,23 @@
       "OriginalItemSpec": "C:\\Users\\Nafis\\.nuget\\packages\\microsoft.netcore.app.runtime.mono.browser-wasm\\6.0.0\\runtimes\\browser-wasm\\native\\dotnet.wasm"
     },
     {
+      "Identity": "F:\\Blazor\\CRUD\\CRUD\\bin\\Debug\\net6.0\\wwwroot\\_framework\\icudt.dat",
+      "SourceId": "CRUD",
+      "SourceType": "Computed",
+      "ContentRoot": "F:\\Blazor\\CRUD\\CRUD\\bin\\Debug\\net6.0\\wwwroot\\",
+      "BasePath": "/",
+      "RelativePath": "_framework/icudt.dat",
+      "AssetKind": "Build",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "BlazorWebAssemblyResource",
+      "AssetTraitValue": "native",
+      "CopyToOutputDirectory": "PreserveNewest",
+      "CopyToPublishDirectory": "Never",
+      "OriginalItemSpec": "C:\\Users\\Nafis\\.nuget\\packages\\microsoft.netcore.app.runtime.mono.browser-wasm\\6.0.0\\runtimes\\browser-wasm\\native\\icudt.dat"
+    },
+    {
       "Identity": "F:\\Blazor\\CRUD\\CRUD\\bin\\Debug\\net6.0\\wwwroot\\_framework\\icudt_CJK.dat",
       "SourceId": "CRUD",
       "SourceType": "Computed",
@@ -219,23 +253,6 @@
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "C:\\Users\\Nafis\\.nuget\\packages\\microsoft.netcore.app.runtime.mono.browser-wasm\\6.0.0\\runtimes\\browser-wasm\\native\\icudt_no_CJK.dat"
-    },
-    {
-      "Identity": "F:\\Blazor\\CRUD\\CRUD\\bin\\Debug\\net6.0\\wwwroot\\_framework\\icudt.dat",
-      "SourceId": "CRUD",
-      "SourceType": "Computed",
-      "ContentRoot": "F:\\Blazor\\CRUD\\CRUD\\bin\\Debug\\net6.0\\wwwroot\\",
-      "BasePath": "/",
-      "RelativePath": "_framework/icudt.dat",
-      "AssetKind": "Build",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "BlazorWebAssemblyResource",
-      "AssetTraitValue": "native",
-      "CopyToOutputDirectory": "PreserveNewest",
-      "CopyToPublishDirectory": "Never",
-      "OriginalItemSpec": "C:\\Users\\Nafis\\.nuget\\packages\\microsoft.netcore.app.runtime.mono.browser-wasm\\6.0.0\\runtimes\\browser-wasm\\native\\icudt.dat"
     },
     {
       "Identity": "F:\\Blazor\\CRUD\\CRUD\\bin\\Debug\\net6.0\\wwwroot\\_framework\\Microsoft.AspNetCore.Authorization.dll",
@@ -4437,6 +4454,23 @@
       "OriginalItemSpec": "F:\\Blazor\\CRUD\\CRUD\\bin\\Debug\\net6.0\\wwwroot\\_framework\\System.ValueTuple.dll"
     },
     {
+      "Identity": "F:\\Blazor\\CRUD\\CRUD\\obj\\Debug\\net6.0\\build-gz\\cvJhtsbl.gz",
+      "SourceId": "CRUD",
+      "SourceType": "Computed",
+      "ContentRoot": "F:\\Blazor\\CRUD\\CRUD\\bin\\Debug\\net6.0\\wwwroot\\",
+      "BasePath": "/",
+      "RelativePath": "_framework/Blazored.LocalStorage.dll.gz",
+      "AssetKind": "Build",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "RelatedAsset": "F:\\Blazor\\CRUD\\CRUD\\bin\\Debug\\net6.0\\wwwroot\\_framework\\Blazored.LocalStorage.dll",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "CopyToOutputDirectory": "PreserveNewest",
+      "CopyToPublishDirectory": "Never",
+      "OriginalItemSpec": "F:\\Blazor\\CRUD\\CRUD\\bin\\Debug\\net6.0\\wwwroot\\_framework\\Blazored.LocalStorage.dll"
+    },
+    {
       "Identity": "F:\\Blazor\\CRUD\\CRUD\\obj\\Debug\\net6.0\\build-gz\\CXXO4n1B.gz",
       "SourceId": "CRUD",
       "SourceType": "Computed",
@@ -6902,40 +6936,6 @@
       "OriginalItemSpec": "F:\\Blazor\\CRUD\\CRUD\\obj\\Debug\\net6.0\\scopedcss\\projectbundle\\CRUD.bundle.scp.css"
     },
     {
-      "Identity": "F:\\Blazor\\CRUD\\CRUD\\obj\\Debug\\net6.0\\service-worker-assets.js",
-      "SourceId": "CRUD",
-      "SourceType": "Computed",
-      "ContentRoot": "F:\\Blazor\\CRUD\\CRUD\\bin\\Debug\\net6.0\\wwwroot\\",
-      "BasePath": "/",
-      "RelativePath": "service-worker-assets.js",
-      "AssetKind": "Publish",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "BlazorServiceWorker",
-      "AssetTraitValue": "ServiceWorkerManifest",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "obj\\Debug\\net6.0\\service-worker-assets.js"
-    },
-    {
-      "Identity": "F:\\Blazor\\CRUD\\CRUD\\obj\\Debug\\net6.0\\service-worker-assets.js.build",
-      "SourceId": "CRUD",
-      "SourceType": "Computed",
-      "ContentRoot": "F:\\Blazor\\CRUD\\CRUD\\bin\\Debug\\net6.0\\wwwroot\\",
-      "BasePath": "/",
-      "RelativePath": "service-worker-assets.js",
-      "AssetKind": "Build",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "BlazorServiceWorker",
-      "AssetTraitValue": "ServiceWorkerManifest",
-      "CopyToOutputDirectory": "PreserveNewest",
-      "CopyToPublishDirectory": "Never",
-      "OriginalItemSpec": "obj\\Debug\\net6.0\\service-worker-assets.js.build"
-    },
-    {
       "Identity": "F:\\Blazor\\CRUD\\CRUD\\obj\\Debug\\net6.0\\service-worker\\service-worker.js",
       "SourceId": "CRUD",
       "SourceType": "Computed",
@@ -6968,6 +6968,40 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\service-worker.published.js"
+    },
+    {
+      "Identity": "F:\\Blazor\\CRUD\\CRUD\\obj\\Debug\\net6.0\\service-worker-assets.js",
+      "SourceId": "CRUD",
+      "SourceType": "Computed",
+      "ContentRoot": "F:\\Blazor\\CRUD\\CRUD\\bin\\Debug\\net6.0\\wwwroot\\",
+      "BasePath": "/",
+      "RelativePath": "service-worker-assets.js",
+      "AssetKind": "Publish",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "BlazorServiceWorker",
+      "AssetTraitValue": "ServiceWorkerManifest",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "obj\\Debug\\net6.0\\service-worker-assets.js"
+    },
+    {
+      "Identity": "F:\\Blazor\\CRUD\\CRUD\\obj\\Debug\\net6.0\\service-worker-assets.js.build",
+      "SourceId": "CRUD",
+      "SourceType": "Computed",
+      "ContentRoot": "F:\\Blazor\\CRUD\\CRUD\\bin\\Debug\\net6.0\\wwwroot\\",
+      "BasePath": "/",
+      "RelativePath": "service-worker-assets.js",
+      "AssetKind": "Build",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "BlazorServiceWorker",
+      "AssetTraitValue": "ServiceWorkerManifest",
+      "CopyToOutputDirectory": "PreserveNewest",
+      "CopyToPublishDirectory": "Never",
+      "OriginalItemSpec": "obj\\Debug\\net6.0\\service-worker-assets.js.build"
     },
     {
       "Identity": "F:\\Blazor\\CRUD\\CRUD\\wwwroot\\css\\app.css",
@@ -7019,23 +7053,6 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\bootstrap\\bootstrap.min.css.map"
-    },
-    {
-      "Identity": "F:\\Blazor\\CRUD\\CRUD\\wwwroot\\css\\open-iconic\\FONT-LICENSE",
-      "SourceId": "CRUD",
-      "SourceType": "Discovered",
-      "ContentRoot": "F:\\Blazor\\CRUD\\CRUD\\wwwroot\\",
-      "BasePath": "/",
-      "RelativePath": "css/open-iconic/FONT-LICENSE",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\css\\open-iconic\\FONT-LICENSE"
     },
     {
       "Identity": "F:\\Blazor\\CRUD\\CRUD\\wwwroot\\css\\open-iconic\\font\\css\\open-iconic-bootstrap.min.css",
@@ -7138,6 +7155,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.woff"
+    },
+    {
+      "Identity": "F:\\Blazor\\CRUD\\CRUD\\wwwroot\\css\\open-iconic\\FONT-LICENSE",
+      "SourceId": "CRUD",
+      "SourceType": "Discovered",
+      "ContentRoot": "F:\\Blazor\\CRUD\\CRUD\\wwwroot\\",
+      "BasePath": "/",
+      "RelativePath": "css/open-iconic/FONT-LICENSE",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\open-iconic\\FONT-LICENSE"
     },
     {
       "Identity": "F:\\Blazor\\CRUD\\CRUD\\wwwroot\\css\\open-iconic\\ICON-LICENSE",

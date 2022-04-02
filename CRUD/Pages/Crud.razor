@@ -1,7 +1,9 @@
 ﻿@page "/crud"
+@using CRUD.Entity
 @using global::CRUD.Pages.Components
 @inject HttpClient Http
 @inject IDialogService DialogService
+@inject Blazored.LocalStorage.ILocalStorageService LocalStore
 
 
 <MudButton @onclick="OpenDialog" Variant="Variant.Filled" Color="Color.Primary">
@@ -11,7 +13,7 @@
 
 <MudPaper Width="100%">
 	<MudContainer Fixed="true">
-		<MudTable Class="mt-5" Items="@riders" Dense="@dense" Hover="@hover" Bordered="@bordered" Striped="@striped" Filter="new Func<Riders, bool>(FilterCycleCheck)">
+		<MudTable Class="mt-5" Items="@ridersLocal" Dense="@dense" Hover="@hover" Bordered="@bordered" Striped="@striped" Filter="new Func<Riders, bool>(FilterCycleCheck)">
     <ToolBarContent>
         <MudText Typo="Typo.h6">Rider Descriptions</MudText>
         <MudSpacer />
@@ -54,12 +56,15 @@
 
 @code {
     private Riders[]? riders;
+    private Riders[]? ridersLocal;
 
     public string searchString1 = "";
     public bool dense = false;
     public bool hover = true;
     public bool bordered = true;
-    public bool striped = false; 
+    public bool striped = false;
+
+    public string testString;
 
 
     // Page On Load
@@ -79,6 +84,9 @@
     private async Task LoadRiders()
     {
         riders = await Http.GetFromJsonAsync<Riders[]>("https://api.bespokeit.io/api/hr/allriderdescription");
+        //ridersLocal = riders;
+        await LocalStore.SetItemAsync("RidersLocal", riders);
+       ridersLocal = await LocalStore.GetItemAsync<Riders[]>("RidersLocal");
     }
 
     // Filter Cycle Check
@@ -92,34 +100,12 @@
 
     }
 
-
-
-    public class Riders
-    {
-        public int id { get; set; }
-        public int riderId { get; set; }
-        public string riderName { get; set; }
-        public string phoneNumber { get; set; }
-        public string address { get; set; }
-        public string jobType { get; set; }
-        public string gender { get; set; }
-        public bool weekly { get; set; }
-        public bool monthly { get; set; }
-    } 
-
-    public class Rider
-    {
-        public int riderId { get; set; }
-        public string address { get; set; }
-        public string jobType { get; set; }
-        public string gender { get; set; }
-        public bool weekly { get; set; }
-        public bool monthly { get; set; }
-    }
-
     private void OpenDialog()
     {
-		var options = new DialogOptions { CloseOnEscapeKey = true };
-        DialogService.Show<AddModal>("Add Rider Description", options);
+        var parameters = new DialogParameters();
+        parameters.Add("riders", riders);
+
+        var options = new DialogOptions { CloseOnEscapeKey = false, FullWidth=true, CloseButton=true };
+        DialogService.Show<AddModal>("Add Rider Description", parameters, options);
     }
 }
