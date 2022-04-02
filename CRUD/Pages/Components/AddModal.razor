@@ -1,11 +1,29 @@
 ﻿<MudDialog>
     <DialogContent>
-        Dialog Content
+        <MudForm @ref="form" @bind-IsValid="@success" @bind-Errors="@errors">
+            <MudTextField T="string" @bind-Value="@address" Label="Address" Required="true" RequiredError="Address is required!"/>
+
+            <MudText Class="mt-5" Typo="Typo.subtitle1">Job Type</MudText>
+            <MudRadioGroup T="string" @bind-SelectedOption="@jobType" Required="true" RequiredError="Job type is required!">
+                            <MudRadio Option="@("Part-Time")">Part-Time</MudRadio>
+                            <MudRadio Option="@("Full-Time")">Full-Time</MudRadio>
+            </MudRadioGroup>
+
+            <MudText Class="mt-5" Typo="Typo.subtitle1">Gender</MudText>
+            <MudRadioGroup T="string" @bind-SelectedOption="@gender" Required="true" RequiredError="Gender is required!">
+                            <MudRadio Option="@("Male")">Male</MudRadio>
+                            <MudRadio Option="@("Female")">Female</MudRadio>
+            </MudRadioGroup>
+
+            <MudText Class="mt-5" Typo="Typo.subtitle1">payment Repetition</MudText>
+            <MudCheckBox @bind-Checked="@weekly" T="bool" Class="ml-n2" Label="Weekly"/>
+            <MudCheckBox @bind-Checked="@monthly" T="bool" Class="ml-n2" Label="Monthly"/>
+
+            <div class="d-flex justify-content-end mb-5">
+                <MudButton Variant="Variant.Filled" Color="Color.Primary" Disabled="@(!success)" OnClick="@newRider" Class="ml-auto">Create Rider Description</MudButton>
+            </div>
+        </MudForm>
     </DialogContent>
-    <DialogActions>
-        <MudButton OnClick="Cancel">Cancel</MudButton>
-        <MudButton Color="Color.Primary" OnClick="Submit">Ok</MudButton>
-    </DialogActions>
 </MudDialog>
 
 @code {
@@ -13,4 +31,28 @@
 
     void Submit() => MudDialog.Close(DialogResult.Ok(true));
     void Cancel() => MudDialog.Cancel();
+
+    // Form Code
+    bool success;
+    string[] errors = { };
+    MudForm form;
+
+    // Input Values
+    string address = "";
+    string jobType = "";
+    string gender = "";
+    bool weekly;
+    bool monthly;
+
+
+    // Add New Rider Description
+    private void newRider()
+    {
+        Console.WriteLine(address);
+        Console.WriteLine(jobType);
+        Console.WriteLine(gender);
+        Console.WriteLine(weekly);
+        Console.WriteLine(monthly);
+    }
+
 }

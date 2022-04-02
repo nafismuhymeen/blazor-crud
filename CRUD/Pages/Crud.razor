@@ -24,6 +24,7 @@
         <MudTh>Job Type</MudTh>
         <MudTh>Gender</MudTh>
         <MudTh>Weekly / Monthly</MudTh>
+        <MudTh>Action</MudTh>
     </HeaderContent>
     <RowTemplate>
         <MudTd DataLabel="Rider Name">@context.riderName</MudTd>
@@ -32,9 +33,13 @@
         <MudTd DataLabel="Job Type">@context.jobType</MudTd>
         <MudTd DataLabel="Gender">@context.gender</MudTd>
         <MudTd DataLabel="Weekly / Monthly">Weekly: @context.weekly, Monthly: @context.monthly</MudTd>
+        <MudTd DataLabel="Name">
+            <MudIconButton Icon="@Icons.Material.Filled.Edit" Color="Color.Success" aria-label="edit" />
+            <MudIconButton Icon="@Icons.Material.Filled.Delete" OnClick="() => DeleteRider(context.id)" Color="Color.Secondary" aria-label="delete" />
+        </MudTd>
     </RowTemplate>
     <PagerContent>
-        <MudTablePager />
+        <MudTablePager PageSizeOptions="new int[]{5, 10, 25, 50, 100}" />
     </PagerContent>
 </MudTable>
 
@@ -60,6 +65,13 @@
     // Page On Load
     protected override async Task OnInitializedAsync()
     {
+        await LoadRiders();
+    }
+
+    // Delete Rider Description
+    private async Task DeleteRider(int riderId)
+    {
+        await Http.DeleteAsync($"https://api.bespokeit.io/api/hr/removeriderDescription/{riderId}");
         await LoadRiders();
     }
 

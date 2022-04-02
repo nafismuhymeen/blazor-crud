@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "334f2830-0d3b-49f0-96c2-6ce5c04f4089": {
+      "ProjectGuid": "334f2830-0d3b-49f0-96c2-6ce5c04f4089",
+      "DisplayName": "CRUD",
+      "ColorIndex": 0
+    }
+  },
+  "NextColorIndex": 1
+}
