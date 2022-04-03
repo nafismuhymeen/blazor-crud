@@ -6,14 +6,14 @@
 @inject Blazored.LocalStorage.ILocalStorageService LocalStore
 
 
-<MudButton @onclick="OpenDialog" Variant="Variant.Filled" Color="Color.Primary">
+<MudButton @onclick="OpenAddDialog" Variant="Variant.Filled" Color="Color.Primary">
     Open Simple Dialog
 </MudButton>
 
 
 <MudPaper Width="100%">
 	<MudContainer Fixed="true">
-		<MudTable Class="mt-5" Items="@ridersLocal" Dense="@dense" Hover="@hover" Bordered="@bordered" Striped="@striped" Filter="new Func<Riders, bool>(FilterCycleCheck)">
+		<MudTable Class="mt-5" Items="@riders" Dense="@dense" Hover="@hover" Bordered="@bordered" Striped="@striped" Filter="new Func<Riders, bool>(FilterCycleCheck)">
     <ToolBarContent>
         <MudText Typo="Typo.h6">Rider Descriptions</MudText>
         <MudSpacer />
@@ -36,7 +36,7 @@
         <MudTd DataLabel="Gender">@context.gender</MudTd>
         <MudTd DataLabel="Weekly / Monthly">Weekly: @context.weekly, Monthly: @context.monthly</MudTd>
         <MudTd DataLabel="Name">
-            <MudIconButton Icon="@Icons.Material.Filled.Edit" Color="Color.Success" aria-label="edit" />
+            <MudIconButton Icon="@Icons.Material.Filled.Edit" OnClick="() => OpenUpdateDialog(context.address, context.gender, context.jobType, context.id, context.monthly, context.weekly)" Color="Color.Success" aria-label="edit" />
             <MudIconButton Icon="@Icons.Material.Filled.Delete" OnClick="() => DeleteRider(context.id)" Color="Color.Secondary" aria-label="delete" />
         </MudTd>
     </RowTemplate>
@@ -56,15 +56,13 @@
 
 @code {
     private Riders[]? riders;
-    private Riders[]? ridersLocal;
+    //private Riders[]? ridersLocal;
 
     public string searchString1 = "";
     public bool dense = false;
     public bool hover = true;
     public bool bordered = true;
     public bool striped = false;
-
-    public string testString;
 
 
     // Page On Load
@@ -80,14 +78,7 @@
         await LoadRiders();
     }
 
-    // Load Riders
-    private async Task LoadRiders()
-    {
-        riders = await Http.GetFromJsonAsync<Riders[]>("https://api.bespokeit.io/api/hr/allriderdescription");
-        //ridersLocal = riders;
-        await LocalStore.SetItemAsync("RidersLocal", riders);
-       ridersLocal = await LocalStore.GetItemAsync<Riders[]>("RidersLocal");
-    }
+
 
     // Filter Cycle Check
     private bool FilterCycleCheck(Riders item)
@@ -100,12 +91,36 @@
 
     }
 
-    private void OpenDialog()
+    private void OpenAddDialog()
     {
         var parameters = new DialogParameters();
-        parameters.Add("riders", riders);
+        parameters.Add("LoadRiders", LoadRiders);
 
         var options = new DialogOptions { CloseOnEscapeKey = false, FullWidth=true, CloseButton=true };
         DialogService.Show<AddModal>("Add Rider Description", parameters, options);
+    }
+    
+    
+    private void OpenUpdateDialog(string address, string gender, string jobType, int itemId, bool monthly, bool weekly )
+    {
+        var parameters = new DialogParameters();
+        parameters.Add("Address", address);
+        parameters.Add("Gender", gender);
+        parameters.Add("JobType", jobType);
+        parameters.Add("ItemId", itemId);
+        parameters.Add("Monthly", monthly);
+        parameters.Add("Weekly", weekly);
+
+        var options = new DialogOptions { CloseOnEscapeKey = false, FullWidth=true, CloseButton=true };
+        DialogService.Show<UpdateModal>("Update Rider Description", parameters, options);
+    }
+
+        // Load Riders
+    public async Task LoadRiders()
+    {
+        riders = await Http.GetFromJsonAsync<Riders[]>("https://api.bespokeit.io/api/hr/allriderdescription");
+        //ridersLocal = riders;
+        //await LocalStore.SetItemAsync("RidersLocal", riders);
+        //ridersLocal = await LocalStore.GetItemAsync<Riders[]>("RidersLocal");
     }
 }

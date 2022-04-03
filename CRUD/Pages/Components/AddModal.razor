@@ -50,7 +50,8 @@
     void Cancel() => MudDialog.Cancel();
 
     // Paremeters
-    [Parameter] public Riders[]? riders { get; set; }
+    [Parameter] public EventCallback LoadRiders { get; set; }
+
 
 
 
@@ -71,12 +72,13 @@
         };
 
     // Add New Rider Description
-    private async  Task newRider()
+    public async Task newRider()
     {
         using var result = await Http.PostAsJsonAsync("https://api.bespokeit.io/api/hr/createRiderDescription", rider);
-        await LocalStore.RemoveItemAsync("RidersLocal");
-        riders = await Http.GetFromJsonAsync<Riders[]>("https://api.bespokeit.io/api/hr/allriderdescription");
-        await LocalStore.SetItemAsync("RidersLocal", riders);
+        await LoadRiders.InvokeAsync();
+        //await LocalStore.RemoveItemAsync("RidersLocal");
+        //riders = await Http.GetFromJsonAsync<Riders[]>("https://api.bespokeit.io/api/hr/allriderdescription");
+        //await LocalStore.SetItemAsync("RidersLocal", riders);
     }
 
 }

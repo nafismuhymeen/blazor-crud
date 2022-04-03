@@ -1,0 +1,56 @@
+﻿@inject HttpClient Http
+
+<MudDialog>
+    <DialogContent>
+        <MudForm @ref="form" @bind-IsValid="@success" @bind-Errors="@errors">
+            <MudTextField T="string" @bind-Value="@Address" Label="Address" Required="true" RequiredError="Address is required!"/>
+
+            <MudText Class="mt-5" Typo="Typo.subtitle1">Job Type</MudText>
+            <MudRadioGroup T="string" @bind-SelectedOption="@JobType" Required="true" RequiredError="Job type is required!">
+                            <MudRadio Option="@("Part-Time")">Part-Time</MudRadio>
+                            <MudRadio Option="@("Full-Time")">Full-Time</MudRadio>
+            </MudRadioGroup>
+
+            <MudText Class="mt-5" Typo="Typo.subtitle1">Gender</MudText>
+            <MudRadioGroup T="string" @bind-SelectedOption="@Gender" Required="true" RequiredError="Gender is required!">
+                            <MudRadio Option="@("Male")">Male</MudRadio>
+                            <MudRadio Option="@("Female")">Female</MudRadio>
+            </MudRadioGroup>
+
+            <MudText Class="mt-5" Typo="Typo.subtitle1">Payment Ripitition</MudText>
+            <MudCheckBox @bind-Checked="@Weekly" T="bool" Class="ml-n2" Label="Weekly"/>
+            <MudCheckBox @bind-Checked="@Monthly" T="bool" Class="ml-n2" Label="Monthly"/>
+
+            <div class="d-flex justify-content-end mb-5">
+                <MudButton Variant="Variant.Filled" Color="Color.Primary" Disabled="@(!success)" OnClick="@UpdateRider" Class="ml-auto">Create Rider Description</MudButton>
+            </div>
+        </MudForm>
+    </DialogContent>
+</MudDialog>
+
+@code {
+    [CascadingParameter] MudDialogInstance MudDialog { get; set; }
+
+    void Submit() => MudDialog.Close(DialogResult.Ok(true));
+    void Cancel() => MudDialog.Cancel();
+
+    // Form Code
+    bool success;
+    string[] errors = { };
+    MudForm form;
+
+    // Parameters
+    [Parameter] public string Address { get; set; }
+    [Parameter] public string Gender { get; set; }
+    [Parameter] public string JobType { get; set; }
+    [Parameter] public int ItemId { get; set; }
+    [Parameter] public bool Monthly { get; set; }
+    [Parameter] public bool Weekly { get; set; }
+
+
+    // Update Rider
+    public async Task UpdateRider()
+    {
+        await Http.PutAsJsonAsync($"https://api.bespokeit.io/api/hr/editriderDescription/{ItemId}", new { address = Address, gender = Gender, jobType = JobType, weekly = Weekly, monthly = Monthly });
+    }
+}
