@@ -1,0 +1,35 @@
+﻿@inject HttpClient Http
+@inject ISnackbar Snackbar
+
+<MudDialog>
+    <DialogContent>
+        <MudText>Do you really want to delete this Rider? This process cannot be undone.</MudText>
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="Cancel">Cancel</MudButton>
+        <MudButton Color="@Color.Error" Variant="Variant.Filled" OnClick="DeleteRider">Delete Rider</MudButton>
+    </DialogActions>
+</MudDialog>
+
+@code {
+    [CascadingParameter] MudDialogInstance MudDialog { get; set; }
+
+    [Parameter] public int RiderId { get; set; }
+
+    // Delete Function
+    private async Task DeleteRider()
+    {
+        await Http.DeleteAsync($"https://api.bespokeit.io/api/hr/removeriderDescription/{RiderId}");
+        Submit();
+        SuccessToast("Rider Deleted Successfully!");
+    }
+
+    void Submit() => MudDialog.Close(DialogResult.Ok(true));
+    void Cancel() => MudDialog.Cancel();
+
+    private void SuccessToast(string msg)
+    {
+        Snackbar.Configuration.PositionClass = Defaults.Classes.Position.TopEnd;
+        Snackbar.Add(msg, Severity.Success);
+    }
+}

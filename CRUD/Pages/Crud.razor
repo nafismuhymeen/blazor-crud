@@ -6,13 +6,16 @@
 @inject Blazored.LocalStorage.ILocalStorageService LocalStore
 
 
-<MudButton @onclick="OpenAddDialog" Variant="Variant.Filled" Color="Color.Primary">
-    Open Simple Dialog
-</MudButton>
+
 
 
 <MudPaper Width="100%">
 	<MudContainer Fixed="true">
+        <div class="mt-5">
+            <MudButton @onclick="OpenAddDialog" Variant="Variant.Filled" Color="Color.Primary">
+    Open Simple Dialog
+</MudButton>
+        </div>
 		<MudTable Class="mt-5" Items="@riders" Dense="@dense" Hover="@hover" Bordered="@bordered" Striped="@striped" Filter="new Func<Riders, bool>(FilterCycleCheck)">
     <ToolBarContent>
         <MudText Typo="Typo.h6">Rider Descriptions</MudText>
@@ -37,7 +40,7 @@
         <MudTd DataLabel="Weekly / Monthly">Weekly: @context.weekly, Monthly: @context.monthly</MudTd>
         <MudTd DataLabel="Name">
             <MudIconButton Icon="@Icons.Material.Filled.Edit" OnClick="() => OpenUpdateDialog(context.address, context.gender, context.jobType, context.id, context.monthly, context.weekly)" Color="Color.Success" aria-label="edit" />
-            <MudIconButton Icon="@Icons.Material.Filled.Delete" OnClick="() => DeleteRider(context.id)" Color="Color.Secondary" aria-label="delete" />
+            <MudIconButton Icon="@Icons.Material.Filled.Delete" OnClick="() => OpenDeleteDialog(context.id)" Color="Color.Secondary" aria-label="delete" />
         </MudTd>
     </RowTemplate>
     <PagerContent>
@@ -50,6 +53,10 @@
     <MudSwitch @bind-Checked="@dense" Color="Color.Secondary">Dense</MudSwitch>
     <MudSwitch @bind-Checked="@striped" Color="Color.Tertiary">Striped</MudSwitch>
     <MudSwitch @bind-Checked="@bordered" Color="Color.Warning">Bordered</MudSwitch>
+</div>
+<div class="mt-5 pb-5 w-100">
+    <MudButton Variant="Variant.Filled" Color="Color.Tertiary">Export CSV</MudButton>
+    <MudButton Variant="Variant.Filled" Color="Color.Info">Export PDF</MudButton>
 </div>
 	</MudContainer>
 </MudPaper>
@@ -71,15 +78,6 @@
         await LoadRiders();
     }
 
-    // Delete Rider Description
-    private async Task DeleteRider(int riderId)
-    {
-        await Http.DeleteAsync($"https://api.bespokeit.io/api/hr/removeriderDescription/{riderId}");
-        await LoadRiders();
-    }
-
-
-
     // Filter Cycle Check
     private bool FilterCycleCheck(Riders item)
     {
@@ -93,11 +91,11 @@
 
     private void OpenAddDialog()
     {
-        var parameters = new DialogParameters();
-        parameters.Add("LoadRiders", LoadRiders);
+        //var parameters = new DialogParameters();
+        //parameters.Add("LoadRiders", LoadRiders);
 
         var options = new DialogOptions { CloseOnEscapeKey = false, FullWidth=true, CloseButton=true };
-        DialogService.Show<AddModal>("Add Rider Description", parameters, options);
+        DialogService.Show<AddModal>("Add Rider Description", options);
     }
     
     
@@ -113,6 +111,15 @@
 
         var options = new DialogOptions { CloseOnEscapeKey = false, FullWidth=true, CloseButton=true };
         DialogService.Show<UpdateModal>("Update Rider Description", parameters, options);
+    }
+    
+    private void OpenDeleteDialog(int riderId)
+    {
+        var parameters = new DialogParameters();
+        parameters.Add("RiderId", riderId);
+
+        var options = new DialogOptions { CloseOnEscapeKey = false, FullWidth=true, CloseButton=true };
+        DialogService.Show<DeleteModal>("Delete Rider?", parameters, options);
     }
 
         // Load Riders

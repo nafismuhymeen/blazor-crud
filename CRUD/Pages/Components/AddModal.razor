@@ -1,6 +1,7 @@
 ﻿@using CRUD.Entity
 @inject HttpClient Http
 @inject Blazored.LocalStorage.ILocalStorageService LocalStore
+@inject ISnackbar Snackbar
 
 <MudDialog>
     <DialogContent>
@@ -50,7 +51,7 @@
     void Cancel() => MudDialog.Cancel();
 
     // Paremeters
-    [Parameter] public EventCallback LoadRiders { get; set; }
+    //[Parameter] public EventCallback LoadRiders { get; set; }
 
 
 
@@ -75,10 +76,18 @@
     public async Task newRider()
     {
         using var result = await Http.PostAsJsonAsync("https://api.bespokeit.io/api/hr/createRiderDescription", rider);
-        await LoadRiders.InvokeAsync();
+        Submit();
+        SuccessToast("Rider Description Added Successfully!");
+        //await LoadRiders.InvokeAsync();
         //await LocalStore.RemoveItemAsync("RidersLocal");
         //riders = await Http.GetFromJsonAsync<Riders[]>("https://api.bespokeit.io/api/hr/allriderdescription");
         //await LocalStore.SetItemAsync("RidersLocal", riders);
+    }
+
+    private void SuccessToast(string msg)
+    {
+        Snackbar.Configuration.PositionClass = Defaults.Classes.Position.TopEnd;
+        Snackbar.Add(msg, Severity.Success);
     }
 
 }
